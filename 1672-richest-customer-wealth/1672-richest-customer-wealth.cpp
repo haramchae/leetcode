@@ -6,9 +6,7 @@ public:
             for(int j = 0; j<accounts[i].size(); j++){
                 temp = temp + accounts[i][j];
             }
-            if(temp>wealth){
-                wealth = temp;
-            }
+            wealth = max(wealth, temp);
             temp = 0;
         }
         return wealth;
