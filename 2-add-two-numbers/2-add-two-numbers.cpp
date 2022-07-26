@@ -11,40 +11,27 @@
 class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
+        ListNode* ans = new ListNode(0);
+        ListNode* temp = ans;
         int flag = 0;
-        ListNode* ans = new ListNode();
-        ListNode* temp1 = l1;
-        ListNode* temp2 = l2;
-        ListNode* temp3 = ans;  
-
-        while(temp1 != nullptr && temp2 != nullptr){
-            int num = temp1->val + temp2->val + flag;
-            if(num>9){
-                flag = 1;
-                ListNode* nextNode = new ListNode(num%10);
-                temp3->next = nextNode;
-            }else{
-                flag = 0;
-                ListNode* nextNode = new ListNode(num);
-                temp3->next = nextNode;
-            }
-            ListNode* newNode = new ListNode();
-            if(temp1->next == nullptr && temp2->next != nullptr){
-                temp1->next = newNode;
-            }else if(temp1->next != nullptr && temp2->next == nullptr){
-                temp2->next = newNode;
-            }
-            temp1 = temp1->next;
-            temp2 = temp2->next;
-            temp3 = temp3->next;
-        }        
-        if(flag == 1){
-            ListNode* nextNode = new ListNode(1);
-            temp3->next = nextNode;
-            flag == 0;
-        }
-
-        return ans->next;
         
+        while(l1!=nullptr || l2!=nullptr || flag==1){
+            int sum = 0;
+            if(l1!=nullptr){
+                sum += l1->val;
+                l1 = l1->next;
+            }
+            if(l2!=nullptr){
+                sum += l2->val;
+                l2 = l2->next;
+            }
+            sum += flag;
+            flag = sum/10;
+            ListNode* newNode = new ListNode(sum%10);
+            temp->next = newNode;
+            temp = temp->next;
+        }
+        
+        return ans->next;
     }
 };
