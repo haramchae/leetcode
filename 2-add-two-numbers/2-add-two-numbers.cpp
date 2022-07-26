@@ -12,13 +12,10 @@ class Solution {
 public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         int flag = 0;
-        ListNode* temp1;
-        ListNode* temp2;
-        ListNode* temp3;
         ListNode* ans = new ListNode();
-        temp1 = l1;
-        temp2 = l2;
-        temp3 = ans;
+        ListNode* temp1 = l1;
+        ListNode* temp2 = l2;
+        ListNode* temp3 = ans;  
 
         while(temp1 != nullptr && temp2 != nullptr){
             int num = temp1->val + temp2->val + flag;
@@ -37,7 +34,6 @@ public:
             }else if(temp1->next != nullptr && temp2->next == nullptr){
                 temp2->next = newNode;
             }
-    
             temp1 = temp1->next;
             temp2 = temp2->next;
             temp3 = temp3->next;
