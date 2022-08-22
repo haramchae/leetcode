@@ -4,32 +4,36 @@ public:
         vector<int> temp;
         vector<vector<int>> ans;
         sort(candidates.begin(), candidates.end());
-        helper(target, 0, candidates, ans, temp);
+        helper(target, 0, 0, candidates, ans, temp);
         return ans;
     }
-    void helper(int target, int depth, vector<int> candidates, vector<vector<int>>& ans, vector<int> temp){
+    void helper(int target, int depth, int total, vector<int> candidates, vector<vector<int>>& ans, vector<int> temp){
         if(depth > candidates.size()){
             return;
         }  
-        if(accumulate(temp.begin(), temp.end(), 0) == target){
+        if(total == target){
             sort(temp.begin(), temp.end());
             auto check = find(ans.begin(), ans.end(), temp);
             if(check == ans.end()){
                ans.push_back(temp); 
             }
             return;
-        }else if(accumulate(temp.begin(), temp.end(), 0) > target){
+        }else if(total > target){
             return;
         }
         
         for(int i = depth; i<candidates.size(); i++){
             temp.push_back(candidates[i]);
-            helper(target, i, candidates, ans, temp);
+            total += candidates[i];
+            helper(target, i, total, candidates, ans, temp);
             temp.pop_back();
+            total -= candidates[i];
             if(i + 1 < candidates.size()){
                 temp.push_back(candidates[i+1]);
-                helper(target, i+1, candidates, ans, temp);
+                total += candidates[i+1];
+                helper(target, i+1, total, candidates, ans, temp);
                 temp.pop_back();
+                total -= candidates[i+1];
             }
             
         }
