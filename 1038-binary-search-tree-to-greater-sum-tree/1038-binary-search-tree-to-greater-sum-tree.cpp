@@ -11,18 +11,19 @@
  */
 class Solution {
 public:
-    int sum = 0;
+ 
     TreeNode* bstToGst(TreeNode* root) {
-        helper(root);
+        int sum = 0;
+        helper(root, sum);
         return root;
     }
     
-    void helper(TreeNode* root){
+    void helper(TreeNode* root, int& sum){
         if(!root) return;
-        helper(root->right);
+        helper(root->right, sum);
         root->val += sum;
         sum = root->val;
-        helper(root->left);
+        helper(root->left, sum);
     }
     
    
