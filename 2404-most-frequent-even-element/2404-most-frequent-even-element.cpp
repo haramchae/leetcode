@@ -10,7 +10,7 @@ public:
             if(it.second>nMax){
                 nMax = it.second;
                 ans = it.first;
-            }
+            }else if(it.second==nMax) nMax = it.second;
         }
         
         return ans == INT_MAX?-1:ans;
