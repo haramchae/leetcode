@@ -11,24 +11,24 @@
  */
 class Solution {
 public:
-    map<int, double> m;
-    map<int, int> m2;
     vector<double> averageOfLevels(TreeNode* root) {
         vector<double> ans;
-        int index = 0;
-        helper(root, index);       
-        for(int i = 0; i<m.size(); i++){
-            ans.push_back(m[i]/m2[i]);
+        queue<TreeNode*> q;
+        q.push(root);
+        while(!q.empty()){
+            int qSize = q.size();
+            double sum = 0;
+            for(int i = 0; i<qSize; i++){
+                TreeNode* node = q.front();
+                sum += node->val;
+                q.pop();
+                if(node->left) q.push(node->left);
+                if(node->right) q.push(node->right);
+            }
+            ans.push_back(sum/qSize);
         }
         return ans;
     }
     
-    void helper(TreeNode* root, int index){
-        if(!root) return;
-        m[index] += root->val;
-        m2[index] += 1;
-        helper(root->left, index+1);
-        helper(root->right, index+1);
-        return;
-    }
+    
 };
