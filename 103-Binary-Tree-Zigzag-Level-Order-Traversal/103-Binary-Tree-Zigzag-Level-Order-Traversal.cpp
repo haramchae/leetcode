@@ -9,6 +9,10 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
+
+//First solution
+// Runtime 8 ms 10.86% Memory 13 MB 5.81%
+/**
 class Solution {
 public:
     vector<vector<int>> ans;
@@ -29,3 +33,34 @@ public:
         dfs(root->right, depth+1);
     }
 };
+**/
+
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>> v;
+        if(!root)return v;
+        queue<TreeNode*> q;
+        q.push(root);
+        int depth = 0;
+        while(!q.empty()){
+            int size = q.size();
+            vector<int> t;
+            while(size--){
+                TreeNode* n = q.front();
+                if(depth%2==0){
+                    t.push_back(n->val);
+                }else{
+                    t.insert(t.begin(), n->val);
+                }
+                q.pop();
+                if(n->left) q.push(n->left);
+                if(n->right) q.push(n->right);
+            }
+            v.push_back(t);
+            depth++;
+        }
+        return v;
+    }    
+};
+
