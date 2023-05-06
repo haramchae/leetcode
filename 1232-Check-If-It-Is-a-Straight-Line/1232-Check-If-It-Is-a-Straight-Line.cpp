@@ -7,6 +7,7 @@ public:
             if((coordinates[i][0]-coordinates[0][0]) * preY !=  (coordinates[i][1]-coordinates[0][1]) * preX)
                 return false;
         }
+        
         return true;
     }
 };
