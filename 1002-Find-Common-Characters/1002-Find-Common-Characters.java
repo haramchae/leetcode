@@ -15,13 +15,11 @@ class Solution {
                 if(arry[l]>arry2[l]) arry[l] = arry2[l];
             }
         }
-
         for(int i = 0; i<26; i++){
             for(int j = 0; j<arry[i]; j++){
                 ans.add(Character.toString((char) ('a'+i)));
             }
         }
         return ans;
-        
     }
 }
