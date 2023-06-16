@@ -15,7 +15,6 @@ class Solution {
                 maxNum = Math.max(maxNum, count);
             }
         }
-
         return maxNum;
     }
 }
