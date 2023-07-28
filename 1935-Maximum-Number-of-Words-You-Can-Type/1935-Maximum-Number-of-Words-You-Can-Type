@@ -1,0 +1,20 @@
+class Solution {
+public:
+    int canBeTypedWords(string text, string brokenLetters) {
+        unordered_map<char, int> um;
+        for(auto ch: brokenLetters){
+            um[ch]++;
+        }
+        int ans = 0, cnt = 0;
+        for(int i = 0; i<text.size(); ++i){
+            if(text[i]==' '){
+                if(cnt == 0) ans++;
+                cnt = 0;
+            }else if(um[text[i]]==1){
+                cnt++;
+            }
+        }
+        if(cnt == 0) ans++;
+        return ans;
+    }
+};
